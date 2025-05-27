@@ -13,14 +13,14 @@ let widgetHeight = 830;
 
 // Fallback responses in case external file doesn't load
 const fallbackResponses = [
-  "Based on your streaming data, your Super Fans are primarily located in Los Angeles, New York, and Austin. These listeners have streamed your tracks over 50 times each in the past month.",
-  "Your best performing post was the behind-the-scenes studio video with 15.2K engagements. Your lowest performing post was the text-only announcement with 203 engagements. Visual content performs 73% better for your audience.",
-  "To reach more people organically: Post consistently at 7 PM EST when your audience is most active, use trending audio clips in your stories, and collaborate with micro-influencers in your genre for cross-promotion.",
-  "I can help you analyze streaming patterns across your roster, create targeted playlist pitching campaigns, and identify which artists have the highest growth potential based on their engagement metrics."
+  "That's a great question, you're absolutely right to question that! There's a graph 5 pixels to the left, did you try using your eyes?",
+  "Can definitley help with that! Amazing you've gone this far in your industry without understanding graphs!",
+  "I know the answer obviously, but if this is how you handle data, I'm not sure how you're handling your artists.",
+  "Hmmm, shouldn't you understand how to read marketing data if it's your job?"
 ];
 
 function preload() {
-  customFont = 'IBM Plex Sans, Arial, sans-serif';
+  customFont = loadFont('assets/IBMPlexSans-Regular.ttf');
   
   sendIcon = loadImage('assets/send.svg', 
     () => console.log('Send icon loaded'), 
@@ -46,19 +46,15 @@ function preload() {
 
 function setup() {
   let canvas = createCanvas(widgetWidth, widgetHeight);
-  canvas.parent('main');
+  // Don't specify parent - let it attach to body by default
   
-  // Keep canvas size fixed - no responsive scaling for the canvas itself
-  canvas.style('display', 'block');
-  canvas.style('margin', '0');
-  canvas.style('position', 'relative');
-
   grayColor = color(240);
   darkGrayColor = color(200);
 
-  // Create message area - FIXED positioning relative to canvas
+  textFont(customFont);
+
+  // Create message area
   messageArea = createElement('div');
-  messageArea.parent('main');
   messageArea.style('font-family', 'IBM Plex Sans, Arial, sans-serif');
   messageArea.style('font-size', '14px');
   messageArea.style('overflow-y', 'scroll');
@@ -71,10 +67,10 @@ function setup() {
   messageArea.style('width', (widgetWidth - 20) + 'px');
   messageArea.style('height', (widgetHeight - 150) + 'px');
   messageArea.style('box-sizing', 'border-box');
+  messageArea.style('z-index', '10');
 
-  // Create input - FIXED positioning
+  // Create input
   input = createInput('');
-  input.parent('main');
   input.style('background-color', '#f0f0f0');
   input.style('border', 'none');
   input.style('border-radius', '15px');
@@ -87,10 +83,10 @@ function setup() {
   input.style('width', (widgetWidth - 95) + 'px');
   input.style('height', '30px');
   input.style('box-sizing', 'border-box');
+  input.style('z-index', '10');
 
-  // Create send button - FIXED positioning
+  // Create send button
   sendButton = createButton('');
-  sendButton.parent('main');
   sendButton.style('background-color', 'transparent');
   sendButton.style('border', 'none');
   sendButton.style('cursor', 'pointer');
@@ -100,8 +96,9 @@ function setup() {
   sendButton.style('right', '10px');
   sendButton.style('width', '40px');
   sendButton.style('height', '30px');
+  sendButton.style('z-index', '10');
 
-  // Create preset buttons - FIXED positioning
+  // Create preset buttons
   let buttonLabels = [
     "Where are my\nSuper Fans?",
     "Show me my best\nand worst social posts.",
@@ -111,7 +108,6 @@ function setup() {
 
   for (let i = 0; i < 4; i++) {
     let btn = createButton(buttonLabels[i]);
-    btn.parent('main');
     btn.style('border', '1px solid #ccc');
     btn.style('background-color', 'white');
     btn.style('border-radius', '10px');
@@ -125,6 +121,7 @@ function setup() {
     btn.style('width', '165px');
     btn.style('height', '80px');
     btn.style('box-sizing', 'border-box');
+    btn.style('z-index', '10');
     btn.mousePressed(() => handleButtonClick(buttonLabels[i]));
     buttons.push(btn);
   }
@@ -162,6 +159,7 @@ function draw() {
 
   // Header text
   textAlign(LEFT, BASELINE);
+  textFont(customFont);
   fill(0);
   textSize(16);
   text("Audience Dashboard Assistant", 65, 30);
