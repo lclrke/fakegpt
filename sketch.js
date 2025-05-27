@@ -20,16 +20,13 @@ function preload() {
 
 function setup() {
   let canvas = createCanvas(widgetWidth, widgetHeight);
-  // Let canvas attach to body automatically
-  
+  canvas.parent('main');
   grayColor = color(240);
   darkGrayColor = color(200);
-
   textFont(customFont);
 
-  // Create message area with minimal styling
   messageArea = createElement('div');
-  messageArea.style('font-family', 'IBM Plex Sans, sans-serif');
+  messageArea.parent('main');
   messageArea.style('font-size', '14px');
   messageArea.style('overflow-y', 'scroll');
   messageArea.style('background-color', 'white');
@@ -41,22 +38,20 @@ function setup() {
   messageArea.style('width', (widgetWidth - 20) + 'px');
   messageArea.style('height', (widgetHeight - 150) + 'px');
 
-  // Create input
   input = createInput('');
-  input.style('background-color', color(240).toString());
+  input.parent('main');
+  input.style('background-color', grayColor.toString());
   input.style('border', 'none');
   input.style('border-radius', '15px');
   input.style('padding', '5px 15px');
-  input.style('font-family', 'IBM Plex Sans, sans-serif');
-  input.attribute('placeholder', 'Type message here');
   input.style('position', 'absolute');
   input.style('bottom', '10px');
   input.style('left', '10px');
   input.style('width', (widgetWidth - 95) + 'px');
   input.style('height', '30px');
 
-  // Create send button
   sendButton = createButton('');
+  sendButton.parent('main');
   sendButton.style('background-color', 'transparent');
   sendButton.style('border', 'none');
   sendButton.style('cursor', 'pointer');
@@ -67,7 +62,6 @@ function setup() {
   sendButton.style('width', '40px');
   sendButton.style('height', '30px');
 
-  // Create preset buttons
   let buttonLabels = [
     "Where are my\nSuper Fans?",
     "Show me my best\nand worst social posts.",
@@ -76,19 +70,11 @@ function setup() {
   ];
 
   for (let i = 0; i < 4; i++) {
-    let btn = createButton(buttonLabels[i]);
-    btn.style('border', '1px solid ' + darkGrayColor.toString());
-    btn.style('background-color', 'white');
-    btn.style('border-radius', '10px');
-    btn.style('font-family', 'IBM Plex Sans, sans-serif');
-    btn.style('font-size', '12px');
-    btn.style('padding', '5px');
-    btn.style('text-align', 'center');
-    btn.style('position', 'absolute');
-    btn.style('left', (10 + (i % 2) * 175) + 'px');
-    btn.style('top', (260 + Math.floor(i / 2) * 90) + 'px');
-    btn.style('width', '165px');
-    btn.style('height', '80px');
+    let btn = createButton('');
+    btn.html(`<p>${buttonLabels[i]}</p>`);
+    btn.parent('main');
+    btn.class('box');
+    btn.position(10 + (i % 2) * 175, 260 + Math.floor(i / 2) * 90);
     btn.mousePressed(() => handleButtonClick(buttonLabels[i]));
     buttons.push(btn);
   }
@@ -108,16 +94,13 @@ function draw() {
   rect(0, 0, widgetWidth, 60);
 
   image(wavoLogo, 15, 10, 40, 40);
-
   textAlign(LEFT, BASELINE);
-  textFont(customFont);
   fill(0);
   textSize(16);
   text("Audience Dashboard Assistant", 65, 30);
   textSize(12);
   fill(100);
   text("Your Data Assistant", 65, 48);
-
   image(sendIcon, widgetWidth - 50, widgetHeight - 35, 25, 25);
 }
 
@@ -155,14 +138,14 @@ function showMessage(msg, isUser) {
   } else {
     let response = isUser ? pickUniqueResponse() : msg;
     let formattedMsg = isUser ? 
-      `<span style="color: ${darkGrayColor}">You asked: ${msg}</span><br>${response}` : 
+      `<span style="color: #888">You asked: ${msg}</span><br>${response}` : 
       response;
     addMessage(formattedMsg);
   }
 }
 
 function hideButtons() {
-  buttons.forEach(btn => btn.style('display', 'none'));
+  buttons.forEach(btn => btn.hide());
 }
 
 function showCreditLimitMessage() {
