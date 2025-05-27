@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'IBM Plex Sans', Arial, sans-serif;
+}
+
+main {
+  position: relative;
+  width: 360px;
+  height: 830px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  min-width: 360px;
+  min-height: 830px;
+  max-width: 360px;
+  max-height: 830px;
+}
+
+div, input, button {
+  font-family: 'IBM Plex Sans', Arial, sans-serif !important;
+  text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+}
+
+div::-webkit-scrollbar {
+  width: 6px;
+}
+
+div::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+div::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+div::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+canvas {
+  display: block !important;
+  width: 360px !important;
+  height: 830px !important;
+}
