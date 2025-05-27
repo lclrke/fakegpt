@@ -9,21 +9,27 @@ html, body {
   padding: 0;
   overflow: hidden;
   font-family: 'IBM Plex Sans', Arial, sans-serif;
+  background-color: #f9f9f9;
 }
 
 main {
   position: relative;
   width: 360px;
   height: 830px;
-  margin: 0;
-  padding: 0;
+  margin: 0 auto;
   overflow: hidden;
-  min-width: 360px;
-  min-height: 830px;
-  max-width: 360px;
-  max-height: 830px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* p5 canvas */
+canvas {
+  display: block !important;
+  width: 360px !important;
+  height: 830px !important;
+}
+
+/* Font & sizing for all elements */
 div, input, button {
   font-family: 'IBM Plex Sans', Arial, sans-serif !important;
   text-size-adjust: none;
@@ -31,26 +37,38 @@ div, input, button {
   -moz-text-size-adjust: none;
 }
 
+/* Message area scrollbar */
 div::-webkit-scrollbar {
   width: 6px;
 }
-
 div::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 3px;
 }
-
 div::-webkit-scrollbar-thumb {
   background: #ccc;
   border-radius: 3px;
 }
-
 div::-webkit-scrollbar-thumb:hover {
   background: #999;
 }
 
-canvas {
-  display: block !important;
-  width: 360px !important;
-  height: 830px !important;
+/* Preset Buttons */
+button.box {
+  width: 165px;
+  height: 80px;
+  margin: 10px;
+  font-size: 12px;
+  padding: 8px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  white-space: pre-line;
+}
+button.box p {
+  margin: 0;
+  font-weight: 500;
+  color: #111827;
 }
